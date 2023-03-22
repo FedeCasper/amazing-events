@@ -5,23 +5,35 @@ fetch(url)
 .then(data => {
      console.log(data)
      let arrayEventos = data.events
-     console.log(arrayEventos);
-     
+     console.log(arrayEventos)
      renderizarCards(arrayEventos)
+     renderizaChechboxs(arrayEventos)
+
+     let botonBuscar = document.getElementById('botonBuscar')
+     let inputText = document.getElementById('inputText')
+     botonBuscar.addEventListener('click', () => filtraPorInputText(arrayEventos, inputText))
+     
+     let checkboxs = document.querySelectorAll('input[type="checkbox"]')
+     let arrayValueCheckboxChecked = []
+     checkboxs.forEach(elemento => elemento.addEventListener('change', () => { 
+          arrayValueCheckboxChecked.push(elemento.value)
+          filtraPorCheckbox(arrayEventos, arrayValueCheckboxChecked)
+     }))
+
+
+     
+
+
 })
 .catch(error => console.error(error))
 
 let contenedorCards = document.getElementById('contenedorCards');
-console.log(contenedorCards);
-
-
+let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
 
 function renderizarCards (array){
-
      let divAuxiliar = document.createElement('div')
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
-
           divAuxiliar.innerHTML += 
           `<div class="card" style="width: 18rem;">
                <img src="${element.image}" class="card-img-top" alt="...">
@@ -31,12 +43,34 @@ function renderizarCards (array){
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                </div>
           </div>`
-
           fragment.appendChild(divAuxiliar)
      });
-
      contenedorCards.appendChild(fragment)
-     // div.appendChild.fragment
-     
 }
+
+function renderizaChechboxs(array){
+     let arrayCategorias = [...new Set(array.map(elemento => elemento.category))]
+     let fragment = document.createDocumentFragment()
+     arrayCategorias.forEach(elemento => {
+          let divAuxiliar = document.createElement('div')
+          divAuxiliar.classList.add('w-25')
+          divAuxiliar.innerHTML += 
+          `<label>
+               <input class="me-3" type="checkbox" name="" id="" value="${elemento}">${elemento}
+          </label>`
+          fragment.appendChild(divAuxiliar)
+     })
+     contenedorCheckboxs.appendChild(fragment)
+}
+
+function filtraPorInputText(array, inputText){
+     let filtro = array.filter(elemento => elemento.name.toLowerCase().includes(inputText.value.toLowerCase()))
+     console.log(filtro);
+}
+
+function filtraPorCheckbox(arrayA, arrayB){
+     let array1 = arrayA.filter(elemento => arrayB.includes(elemento.category))
+     console.log(array1);
+}
+
 
