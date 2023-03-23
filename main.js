@@ -6,7 +6,7 @@ fetch(url)
      console.log(data)
      let arrayEventos = data.events
      console.log(arrayEventos)
-     renderizarCards(arrayEventos)
+     // renderizarCards(arrayEventos)
      renderizaChechboxs(arrayEventos)
 
      let botonBuscar = document.getElementById('botonBuscar')
@@ -14,19 +14,26 @@ fetch(url)
      botonBuscar.addEventListener('click', () => filtraPorInputText(arrayEventos, inputText))
      
      let checkboxs = document.querySelectorAll('input[type="checkbox"]')
-     console.log(checkboxs);
+     checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraPorCheckbox(checkboxs, arrayEventos)))
 
-     let aux = []
-     checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => {console.log("aux")}))
-
+     
 
 })
 .catch(error => console.error(error))
 
 let contenedorCards = document.getElementById('contenedorCards');
 let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
+let contadorCards = document.getElementById('contadorCards')
+
+function imprimirNumeroCards (array){
+     let div = document.createElement('div')
+     let cantidadCards = array.length
+     div.innerHTML = `<h4>Cantidad de cards ${cantidadCards}</h4>`
+contadorCards.appendChild(div)
+}
 
 function renderizarCards (array){
+     contadorCards.innerHTML = ""
      let divAuxiliar = document.createElement('div')
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
@@ -62,11 +69,21 @@ function renderizaChechboxs(array){
 function filtraPorInputText(array, inputText){
      let filtro = array.filter(elemento => elemento.name.toLowerCase().includes(inputText.value.toLowerCase()))
      console.log(filtro);
+     renderizarCards(filtro)
 }
 
-function filtraPorCheckbox(array, arrayCheckboxCheked){
-     let array1 = array.filter(elemento => arrayCheckboxCheked.includes(elemento.category))
-     console.log(array1);
+function filtraPorCheckbox (nodeList, array){
+     contenedorCards.innerHTML = ""
+     let arrayDeValuesCheckbox = Array.from(nodeList).filter(checkbox => checkbox.checked).map(CheckboxCheked => CheckboxCheked.value)
+     console.log(arrayDeValuesCheckbox);
+     let arrayObjetosFiltradosPorCheckbox = array.filter(elemento => arrayDeValuesCheckbox.includes(elemento.category))
+     console.log(arrayObjetosFiltradosPorCheckbox);
+     if(arrayDeValuesCheckbox.length > 0){
+          renderizarCards(arrayObjetosFiltradosPorCheckbox)
+     }else{
+          contadorCards.innerHTML = ""
+     }
+     
 }
 
 
