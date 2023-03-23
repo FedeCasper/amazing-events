@@ -3,9 +3,12 @@ const url = "https://mindhub-xj03.onrender.com/api/amazing"
 fetch(url)
 .then(response => response.json())
 .then(data => {
-     console.log(data)
+     // console.log(data)
      let arrayEventos = data.events
-     console.log(arrayEventos)
+     // console.log(arrayEventos)
+     if(arrayEventos.length > 0){
+          renderizarCards(arrayEventos, contenedorCards)
+     }
      // renderizarCards(arrayEventos)
      let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
      renderizaChechboxs(arrayEventos, contenedorCheckboxs )
@@ -69,19 +72,26 @@ function renderizaChechboxs(array, contenedor){
 function filtraPorInputText(array, inputText){
      let filtro = array.filter(elemento => elemento.name.toLowerCase().includes(inputText.value.toLowerCase()))
      console.log(filtro);
-     renderizarCards(filtro, contenedorCards)
+     // renderizarCards(filtro, contenedorCards)
+     return filtro
 }
 
 function filtraPorCheckbox (nodeList, array){
      contenedorCards.innerHTML = ""
      let arrayDeValuesCheckbox = Array.from(nodeList).filter(checkbox => checkbox.checked).map(CheckboxCheked => CheckboxCheked.value)
      console.log(arrayDeValuesCheckbox);
-     let arrayObjetosFiltradosPorCheckbox = array.filter(elemento => arrayDeValuesCheckbox.includes(elemento.category))
-     console.log(arrayObjetosFiltradosPorCheckbox);
-     renderizarCards(arrayObjetosFiltradosPorCheckbox, contenedorCards)
+     console.log(array);
+     if(arrayDeValuesCheckbox.length === 0){
+          renderizarCards(array, contenedorCards)
+     }else{
+          let arrayObjetosFiltradosPorCheckbox = array.filter(elemento => arrayDeValuesCheckbox.includes(elemento.category))
+          console.log(arrayObjetosFiltradosPorCheckbox);
+          renderizarCards(arrayObjetosFiltradosPorCheckbox, contenedorCards)
+     }
 }
 
 function filtraCruzado (nodeList, array, inputText){
-     filtraPorInputText(array, inputText)
-     filtraPorCheckbox(nodeList, array)
+     let filtro = filtraPorInputText(array, inputText)
+     console.log(filtro);
+     filtraPorCheckbox(nodeList, filtro)
 }
