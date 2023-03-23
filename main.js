@@ -3,9 +3,8 @@ const url = "https://mindhub-xj03.onrender.com/api/amazing"
 fetch(url)
 .then(response => response.json())
 .then(data => {
-     // console.log(data)
      let arrayEventos = data.events
-     // console.log(arrayEventos)
+     console.log(arrayEventos)
      if(arrayEventos.length > 0){
           renderizarCards(arrayEventos, contenedorCards)
      }
@@ -38,6 +37,7 @@ function imprimirNumeroCards (array){
 function renderizarCards (array, contenedor){
      contadorCards.innerHTML = ""
      let divAuxiliar = document.createElement('div')
+     divAuxiliar.classList.add('d-flex', 'flex-wrap', 'gap-3', 'justify-content-center')
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
@@ -45,7 +45,10 @@ function renderizarCards (array, contenedor){
                <img src="${element.image}" class="card-img-top" alt="...">
                <div class="card-body">
                     <h5 class="card-title">${element.name}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h6 class="card-title">${element.category}</h6>
+                    <p class="card-text">${element.description}</p>
+                    <h6 class="card-text">Capacity: ${element.capacity} pers.</h6>
+                    <h6 class="card-text">Assitance: $${element.assistance}</h6>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                </div>
           </div>`

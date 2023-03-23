@@ -11,13 +11,13 @@
      <title>Amazing Events</title>
 </head>
 
-<body>
+<body class="d-flex flex-column align-items-center bg-body-secondary">
 
      <header>
           <h1>Amazing Events</h1>
      </header>
 
-     <nav>
+     <nav class="m-3">
           <a href="#">Home</a>
           <a href="#">Past Events</a>
           <a href="#">Future Events</a>
@@ -25,16 +25,16 @@
           <a href="#">Stats</a>
      </nav>
 
-     <main>
-          <div id="contenedorCheckboxs" class="d-flex">
+     <main class="w-75">
+          <div id="contenedorCheckboxs" class="d-flex bg-info-subtle p-3">
                <!-- Acá se imprimen los checkbox -->
           </div>
-          <div>
+          <div class="m-3">
                <input type="text" name="" id="inputText">
                <button type="button" id="botonBuscar">Buscar</button> 
                <div id="contadorCards"></div>
           </div>
-          <div id="contenedorCards">
+          <div id="contenedorCards" class="d-flex bg-dark-subtle p-5">
                <!-- Acá se imprimen las cards -->
           </div>
      </main>
