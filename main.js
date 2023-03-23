@@ -7,32 +7,32 @@ fetch(url)
      let arrayEventos = data.events
      console.log(arrayEventos)
      // renderizarCards(arrayEventos)
-     renderizaChechboxs(arrayEventos)
+     let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
+     renderizaChechboxs(arrayEventos, contenedorCheckboxs )
 
      let botonBuscar = document.getElementById('botonBuscar')
      let inputText = document.getElementById('inputText')
-     botonBuscar.addEventListener('click', () => filtraPorInputText(arrayEventos, inputText))
-     
      let checkboxs = document.querySelectorAll('input[type="checkbox"]')
-     checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraPorCheckbox(checkboxs, arrayEventos)))
 
+     botonBuscar.addEventListener('click', () => filtraCruzado(checkboxs, arrayEventos, inputText))
      
+     checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraCruzado(checkboxs, arrayEventos, inputText)))
 
 })
 .catch(error => console.error(error))
 
 let contenedorCards = document.getElementById('contenedorCards');
-let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
+
 let contadorCards = document.getElementById('contadorCards')
 
 function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
      div.innerHTML = `<h4>Cantidad de cards ${cantidadCards}</h4>`
-contadorCards.appendChild(div)
+     contadorCards.appendChild(div)
 }
 
-function renderizarCards (array){
+function renderizarCards (array, contenedor){
      contadorCards.innerHTML = ""
      let divAuxiliar = document.createElement('div')
      let fragment = document.createDocumentFragment()
@@ -48,10 +48,10 @@ function renderizarCards (array){
           </div>`
           fragment.appendChild(divAuxiliar)
      });
-     contenedorCards.appendChild(fragment)
+     contenedor.appendChild(fragment)
 }
 
-function renderizaChechboxs(array){
+function renderizaChechboxs(array, contenedor){
      let arrayCategorias = [...new Set(array.map(elemento => elemento.category))]
      let fragment = document.createDocumentFragment()
      arrayCategorias.forEach(elemento => {
@@ -63,13 +63,13 @@ function renderizaChechboxs(array){
           </label>`
           fragment.appendChild(divAuxiliar)
      })
-     contenedorCheckboxs.appendChild(fragment)
+     contenedor.appendChild(fragment)
 }
 
 function filtraPorInputText(array, inputText){
      let filtro = array.filter(elemento => elemento.name.toLowerCase().includes(inputText.value.toLowerCase()))
      console.log(filtro);
-     renderizarCards(filtro)
+     renderizarCards(filtro, contenedorCards)
 }
 
 function filtraPorCheckbox (nodeList, array){
@@ -78,12 +78,10 @@ function filtraPorCheckbox (nodeList, array){
      console.log(arrayDeValuesCheckbox);
      let arrayObjetosFiltradosPorCheckbox = array.filter(elemento => arrayDeValuesCheckbox.includes(elemento.category))
      console.log(arrayObjetosFiltradosPorCheckbox);
-     if(arrayDeValuesCheckbox.length > 0){
-          renderizarCards(arrayObjetosFiltradosPorCheckbox)
-     }else{
-          contadorCards.innerHTML = ""
-     }
-     
+     renderizarCards(arrayObjetosFiltradosPorCheckbox, contenedorCards)
 }
 
-
+function filtraCruzado (nodeList, array, inputText){
+     filtraPorInputText(array, inputText)
+     filtraPorCheckbox(nodeList, array)
+}
