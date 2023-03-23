@@ -14,14 +14,10 @@ fetch(url)
      botonBuscar.addEventListener('click', () => filtraPorInputText(arrayEventos, inputText))
      
      let checkboxs = document.querySelectorAll('input[type="checkbox"]')
-     let arrayValueCheckboxChecked = []
-     checkboxs.forEach(elemento => elemento.addEventListener('change', () => { 
-          arrayValueCheckboxChecked.push(elemento.value)
-          filtraPorCheckbox(arrayEventos, arrayValueCheckboxChecked)
-     }))
+     console.log(checkboxs);
 
-
-     
+     let aux = []
+     checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => {console.log("aux")}))
 
 
 })
@@ -68,8 +64,8 @@ function filtraPorInputText(array, inputText){
      console.log(filtro);
 }
 
-function filtraPorCheckbox(arrayA, arrayB){
-     let array1 = arrayA.filter(elemento => arrayB.includes(elemento.category))
+function filtraPorCheckbox(array, arrayCheckboxCheked){
+     let array1 = array.filter(elemento => arrayCheckboxCheked.includes(elemento.category))
      console.log(array1);
 }
 
