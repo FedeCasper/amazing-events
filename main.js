@@ -4,11 +4,9 @@ fetch(url)
 .then(response => response.json())
 .then(data => {
      let arrayEventos = data.events
-     console.log(arrayEventos)
-     if(arrayEventos.length > 0){
-          renderizarCards(arrayEventos, contenedorCards)
-     }
-     // renderizarCards(arrayEventos)
+
+     renderizarCards(arrayEventos, contenedorCards)
+     
      let contenedorCheckboxs = document.getElementById('contenedorCheckboxs');
      renderizaChechboxs(arrayEventos, contenedorCheckboxs )
 
@@ -30,7 +28,7 @@ let contadorCards = document.getElementById('contadorCards')
 function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
-     div.innerHTML = `<h4>Cantidad de cards ${cantidadCards}</h4>`
+     div.innerHTML = `<h5>Cantidad de cards ${cantidadCards}</h5>`
      contadorCards.appendChild(div)
 }
 
@@ -55,6 +53,7 @@ function renderizarCards (array, contenedor){
           fragment.appendChild(divAuxiliar)
      });
      contenedor.appendChild(fragment)
+     imprimirNumeroCards(array)
 }
 
 function renderizaChechboxs(array, contenedor){
