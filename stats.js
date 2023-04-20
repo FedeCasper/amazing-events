@@ -1,19 +1,30 @@
 const url = "https://mindhub-xj03.onrender.com/api/amazing"
 let table1 = document.getElementById('table1')
-
+let tbodyPastEvent = document.getElementById('pastEventsTbody')
+let tbodyUpcomingEvent = document.getElementById('upcommingEventsTbody')
 
 fetch(url)
      .then(response => response.json())
      .then(data => {
+          let currentDate = new Date(data.currentDate)
+          console.log(data.currentDate);
           let arrayEvents = data.events
           // console.log(arrayEvents);
+          let arrayUpcommingEvents =  [...new Set((arrayEvents.filter( element => (new Date(element.date) > currentDate))).map( element => element.category))]
+          console.log(arrayUpcommingEvents);
+          let arrayPastEvents = [...new Set((arrayEvents.filter( element => (new Date(element.date) < currentDate))).map( element => element.category))]
+          console.log(arrayPastEvents);
           let varFiltredAssistanceSort = filterAssistanceSort(arrayEvents)
           console.log(varFiltredAssistanceSort);
           let varFilterPercentageAssistance = filterPercentageAssistance(varFiltredAssistanceSort)
           console.log(varFilterPercentageAssistance);
           let varEventsWithCapacitySorted = filterCapacitySort(arrayEvents)
           console.log(varEventsWithCapacitySorted);
+          
           printTable1(varFilterPercentageAssistance, varEventsWithCapacitySorted)
+          printTable2and3(arrayPastEvents, tbodyPastEvent)
+          printTable2and3(arrayPastEvents, tbodyUpcomingEvent)
+
      })
 
 
@@ -47,6 +58,7 @@ function printTable1(arrayA, arrayB) {
      let eventWithHighestCapacity = arrayB.pop()
      console.log(eventWithLowestPercent);
      table1.innerHTML = `
+     <th>Event statistics</th>
      <tr> 
           <td>Events with the highest % of assistance</td>
           <td>Events with the lowest % of assistance</td>
@@ -58,4 +70,14 @@ function printTable1(arrayA, arrayB) {
           <td>${eventWithHighestCapacity.name} ${eventWithHighestCapacity.capacity}</td>
      </tr>
      `
+}
+
+function printTable2and3(array,id){
+     array.forEach(element => {
+          id.innerHTML += `
+          <tr>
+               <td>${element}</td>
+          </tr>
+          `
+     });
 }
