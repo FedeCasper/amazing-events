@@ -10,20 +10,37 @@ fetch(url)
           console.log(data.currentDate);
           let arrayEvents = data.events
           // console.log(arrayEvents);
-          let arrayUpcommingEvents =  [...new Set((arrayEvents.filter( element => (new Date(element.date) > currentDate))).map( element => element.category))]
-          console.log(arrayUpcommingEvents);
-          let arrayPastEvents = [...new Set((arrayEvents.filter( element => (new Date(element.date) < currentDate))).map( element => element.category))]
-          console.log(arrayPastEvents);
+          let arrayUpcommingEvents =  arrayEvents.filter( element => (new Date(element.date) > currentDate))
+          console.log("UPCOMMING EVENTS" , arrayUpcommingEvents);
+
+          let arrayPastEvents =  arrayEvents.filter( element => (new Date(element.date) < currentDate))
+          console.log("PAST EVENTS" , arrayPastEvents);
+
+          let arrayUpcommingEventValues =  [...new Set((arrayEvents.filter( element => (new Date(element.date) > currentDate))).map( element => element.category))]
+          console.log("UPCOMING VALUES", arrayUpcommingEventValues);
+
+          let arrayPastEventsValues = [...new Set((arrayEvents.filter( element => (new Date(element.date) < currentDate))).map( element => element.category))]
+          console.log("PAST VALUES",arrayPastEventsValues);
+
           let varFiltredAssistanceSort = filterAssistanceSort(arrayEvents)
           console.log(varFiltredAssistanceSort);
+
           let varFilterPercentageAssistance = filterPercentageAssistance(varFiltredAssistanceSort)
           console.log(varFilterPercentageAssistance);
+
           let varEventsWithCapacitySorted = filterCapacitySort(arrayEvents)
           console.log(varEventsWithCapacitySorted);
           
+          let arraysByPastCategories = filterCreateArraybyCategories (arrayPastEventsValues, arrayPastEvents)
+          console.log("ARRAY PAST CATEGORIES ARRAY", arraysByPastCategories);
+          let arraysByUpcomingCategories = filterCreateArraybyCategories (arrayUpcommingEventValues, arrayUpcommingEvents)
+          console.log("ARRAY UPCOMING CATEGORIES ARRAY", arraysByUpcomingCategories);
+
+          
+
           printTable1(varFilterPercentageAssistance, varEventsWithCapacitySorted)
-          printTable2and3(arrayPastEvents, tbodyPastEvent)
-          printTable2and3(arrayPastEvents, tbodyUpcomingEvent)
+          printTable2and3(arrayPastEventsValues, tbodyPastEvent)
+          printTable2and3(arrayPastEventsValues, tbodyUpcomingEvent)
 
      })
 
@@ -50,9 +67,18 @@ function filterCapacitySort(array){
      return array.sort( (a,b) => a.capacity - b.capacity)
 }
 
+function filterCreateArraybyCategories (arrayA, arrayB){
+     let arrayNodriz = []
+     let acc = 0;
+     for( let value of arrayA){
+          let aux = arrayB.filter( element => element.category === value)
+          console.log(`${value}` , aux);
+          arrayNodriz.push(aux)
+     }
+     return arrayNodriz
+}
+
 function printTable1(arrayA, arrayB) {
-     console.log(arrayA);
-     console.log(arrayA[1]);
      let eventWithLowestPercent = arrayA.shift()
      let eventWithHighestPercent = arrayA.pop()
      let eventWithHighestCapacity = arrayB.pop()
