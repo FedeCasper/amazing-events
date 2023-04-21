@@ -1,3 +1,12 @@
+import { 
+     filterAssistanceSort,
+     filterPercentageAssistance,
+     filterCapacitySort,
+     filterCreateArrayRevenues,
+     printTable1,
+     printTable2and3 
+} from "./module/functions.js"
+
 const url = "https://mindhub-xj03.onrender.com/api/amazing"
 let table1 = document.getElementById('table1')
 let tbodyPastEvent = document.getElementById('pastEventsTbody')
@@ -29,92 +38,15 @@ fetch(url)
           // console.log(varFilterPercentageAssistance);
 
           let varEventsWithCapacitySorted = filterCapacitySort(arrayEvents)
-          console.log(varEventsWithCapacitySorted);
+          // console.log(varEventsWithCapacitySorted);
           
           let arraysByPastCategories = filterCreateArrayRevenues (arrayPastEventsValues, arrayPastEvents)
-          console.log("ARRAY PAST CATEGORIES REVENUES", arraysByPastCategories);
+          // console.log("ARRAY PAST CATEGORIES REVENUES", arraysByPastCategories);
           let arraysByUpcomingCategories = filterCreateArrayRevenues (arrayUpcommingEventValues, arrayUpcommingEvents)
-          console.log("ARRAY UPCOMING CATEGORIES REVENUES", arraysByUpcomingCategories);
-
-          
+          // console.log("ARRAY UPCOMING CATEGORIES REVENUES", arraysByUpcomingCategories);
 
           printTable1(varFilterPercentageAssistance, varEventsWithCapacitySorted)
           printTable2and3(arraysByPastCategories, tbodyPastEvent)
           printTable2and3(arraysByUpcomingCategories, tbodyUpcomingEvent)
 
      })
-
-
-function filterAssistanceSort(array) {
-     let eventsWithAssistance = array.filter(element => element.assistance)
-     let eventsWithAssistanceSorted = [...eventsWithAssistance].sort((a, b) => a.assistance - b.assistance)
-     return eventsWithAssistanceSorted
-}
-
-function filterPercentageAssistance(array){
-     let aux = []
-     array.map( element => {
-          let arrayElement = {
-               event: element.name,
-               percentage: ( element.assistance * 100 / element.capacity ).toFixed(2)
-          }
-     aux.push(arrayElement)
-     }) 
-     return aux.sort( (a,b) => a.percentage - b.percentage)
-}
-
-function filterCapacitySort(array){
-     return array.sort( (a,b) => a.capacity - b.capacity)
-}
-
-function filterCreateArrayRevenues (arrayA, arrayB){
-     let arrayObjectRevenues = []
-     for( let value of arrayA){
-
-          let aux = arrayB.filter( element => element.category === value)
-          console.log(`${value}` , aux);
-          let pastRevenuesTotal = aux.reduce( (acc, element) => acc + (element.assistance? element.assistance * element.price : element.estimate * element.price), 0,)
-          let percentageTotal = (aux.reduce( (acc, element) => acc + ( (element.assistance? element.assistance * 100 / element.capacity : element.estimate * 100 / element.capacity) ), 0) / aux.length).toFixed(2)
-
-          // console.log(`${value}`, pastRevenuesTotal);
-          arrayObjectRevenues.push( {
-               name: `${value}`,
-               revenue: pastRevenuesTotal,
-               assistancePercentage: percentageTotal
-          })
-     }
-     console.log(arrayObjectRevenues);
-     return arrayObjectRevenues
-}
-
-function printTable1(arrayA, arrayB) {
-     let eventWithLowestPercent = arrayA.shift()
-     let eventWithHighestPercent = arrayA.pop()
-     let eventWithHighestCapacity = arrayB.pop()
-     // console.log(eventWithLowestPercent);
-     table1.innerHTML = `
-     <th>Event statistics</th>
-     <tr> 
-          <td>Events with the highest % of assistance</td>
-          <td>Events with the lowest % of assistance</td>
-          <td>Event with larger capacity</td>
-     </tr>
-     <tr>
-          <td>${eventWithHighestPercent.event} ${eventWithHighestPercent.percentage}%</td>
-          <td>${eventWithHighestPercent.event} ${eventWithLowestPercent.percentage}%</td>
-          <td>${eventWithHighestCapacity.name} ${eventWithHighestCapacity.capacity}</td>
-     </tr>
-     `
-}
-
-function printTable2and3(array,id){
-     array.forEach(element => {
-          id.innerHTML += `
-          <tr>
-               <td>${element.name}</td>
-               <td>${element.revenue}</td>
-               <td>${element.assistancePercentage}%</td>
-          </tr>
-          `
-     });
-}

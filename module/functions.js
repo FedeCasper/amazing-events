@@ -1,7 +1,7 @@
 export function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
-     div.innerHTML = `<h5>Cantidad de cards ${cantidadCards}</h5>`
+     div.innerHTML = `<h5>Found ${cantidadCards} events.</h5>`
      contadorCards.appendChild(div)
 }
 
@@ -19,7 +19,8 @@ export function renderizarCards (array, contenedor){
                     <h6 class="card-title">${element.category}</h6>
                     <p class="card-text">${element.description}</p>
                     <h6 class="card-text">Capacity: ${element.capacity} pers.</h6>
-                    <h6 class="card-text">Assitance: $${element.assistance}</h6>
+                    <h6 class="card-text">Assitance: ${element.assistance}</h6>
+                    <h6 class="card-text">Price: $${element.assistance}</h6>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                </div>
           </div>`
@@ -69,4 +70,80 @@ export function filtraCruzado (nodeList, array, inputText){
      let filtro = filtraPorInputText(array, inputText)
      console.log(filtro);
      filtraPorCheckbox(nodeList, filtro)
+}
+
+// Stats Functions ------------------------//
+
+export function filterAssistanceSort(array) {
+     let eventsWithAssistance = array.filter(element => element.assistance)
+     let eventsWithAssistanceSorted = [...eventsWithAssistance].sort((a, b) => a.assistance - b.assistance)
+     return eventsWithAssistanceSorted
+}
+
+export function filterPercentageAssistance(array){
+     let aux = []
+     array.map( element => {
+          let arrayElement = {
+               event: element.name,
+               percentage: ( element.assistance * 100 / element.capacity ).toFixed(2)
+          }
+     aux.push(arrayElement)
+     }) 
+     return aux.sort( (a,b) => a.percentage - b.percentage)
+}
+
+export function filterCapacitySort(array){
+     return array.sort( (a,b) => a.capacity - b.capacity)
+}
+
+export function filterCreateArrayRevenues (arrayA, arrayB){
+     let arrayObjectRevenues = []
+     for( let value of arrayA){
+
+          let aux = arrayB.filter( element => element.category === value)
+          console.log(`${value}` , aux);
+          let pastRevenuesTotal = aux.reduce( (acc, element) => acc + (element.assistance? element.assistance * element.price : element.estimate * element.price), 0,)
+          let percentageTotal = (aux.reduce( (acc, element) => acc + ( (element.assistance? element.assistance * 100 / element.capacity : element.estimate * 100 / element.capacity) ), 0) / aux.length).toFixed(2)
+
+          // console.log(`${value}`, pastRevenuesTotal);
+          arrayObjectRevenues.push( {
+               name: `${value}`,
+               revenue: pastRevenuesTotal,
+               assistancePercentage: percentageTotal
+          })
+     }
+     console.log(arrayObjectRevenues);
+     return arrayObjectRevenues
+}
+
+export function printTable1(arrayA, arrayB) {
+     let eventWithLowestPercent = arrayA.shift()
+     let eventWithHighestPercent = arrayA.pop()
+     let eventWithHighestCapacity = arrayB.pop()
+     // console.log(eventWithLowestPercent);
+     table1.innerHTML = `
+     <th>Event statistics</th>
+     <tr> 
+          <td>Events with the highest % of assistance</td>
+          <td>Events with the lowest % of assistance</td>
+          <td>Event with larger capacity</td>
+     </tr>
+     <tr>
+          <td>${eventWithHighestPercent.event} ${eventWithHighestPercent.percentage}%</td>
+          <td>${eventWithHighestPercent.event} ${eventWithLowestPercent.percentage}%</td>
+          <td>${eventWithHighestCapacity.name} ${eventWithHighestCapacity.capacity}</td>
+     </tr>
+     `
+}
+
+export function printTable2and3(array,id){
+     array.forEach(element => {
+          id.innerHTML += `
+          <tr>
+               <td>${element.name}</td>
+               <td>${element.revenue}</td>
+               <td>${element.assistancePercentage}%</td>
+          </tr>
+          `
+     });
 }
