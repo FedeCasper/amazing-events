@@ -7,7 +7,7 @@ fetch(url)
      .then(response => response.json())
      .then(data => {
           let currentDate = new Date(data.currentDate)
-          console.log(data.currentDate);
+          // console.log(data.currentDate);
           let arrayEvents = data.events
           // console.log(arrayEvents);
           let arrayUpcommingEvents =  arrayEvents.filter( element => (new Date(element.date) > currentDate))
@@ -23,24 +23,24 @@ fetch(url)
           console.log("PAST VALUES",arrayPastEventsValues);
 
           let varFiltredAssistanceSort = filterAssistanceSort(arrayEvents)
-          console.log(varFiltredAssistanceSort);
+          // console.log(varFiltredAssistanceSort);
 
           let varFilterPercentageAssistance = filterPercentageAssistance(varFiltredAssistanceSort)
-          console.log(varFilterPercentageAssistance);
+          // console.log(varFilterPercentageAssistance);
 
           let varEventsWithCapacitySorted = filterCapacitySort(arrayEvents)
           console.log(varEventsWithCapacitySorted);
           
-          let arraysByPastCategories = filterCreateArraybyCategories (arrayPastEventsValues, arrayPastEvents)
-          console.log("ARRAY PAST CATEGORIES ARRAY", arraysByPastCategories);
-          let arraysByUpcomingCategories = filterCreateArraybyCategories (arrayUpcommingEventValues, arrayUpcommingEvents)
-          console.log("ARRAY UPCOMING CATEGORIES ARRAY", arraysByUpcomingCategories);
+          let arraysByPastCategories = filterCreateArrayRevenues (arrayPastEventsValues, arrayPastEvents)
+          console.log("ARRAY PAST CATEGORIES REVENUES", arraysByPastCategories);
+          let arraysByUpcomingCategories = filterCreateArrayRevenues (arrayUpcommingEventValues, arrayUpcommingEvents)
+          console.log("ARRAY UPCOMING CATEGORIES REVENUES", arraysByUpcomingCategories);
 
           
 
           printTable1(varFilterPercentageAssistance, varEventsWithCapacitySorted)
-          printTable2and3(arrayPastEventsValues, tbodyPastEvent)
-          printTable2and3(arrayPastEventsValues, tbodyUpcomingEvent)
+          printTable2and3(arraysByPastCategories, tbodyPastEvent)
+          printTable2and3(arraysByUpcomingCategories, tbodyUpcomingEvent)
 
      })
 
@@ -67,14 +67,23 @@ function filterCapacitySort(array){
      return array.sort( (a,b) => a.capacity - b.capacity)
 }
 
-function filterCreateArraybyCategories (arrayA, arrayB){
+function filterCreateArrayRevenues (arrayA, arrayB){
      let arrayNodriz = []
-     let acc = 0;
      for( let value of arrayA){
+
           let aux = arrayB.filter( element => element.category === value)
           console.log(`${value}` , aux);
-          arrayNodriz.push(aux)
+          let pastRevenues = aux.reduce( (acc, element) => acc + (element.assistance? element.assistance * element.price : element.estimate * element.price), 0,)
+          let percentage = (aux.reduce( (acc, element) => acc + ( (element.assistance * 100 / element.capacity) ), 0) / aux.length).toFixed(2)
+
+          console.log(`${value}`, pastRevenues);
+          arrayNodriz.push( {
+               name: `${value}`,
+               revenue: pastRevenues,
+               assistancePercentage: `percentage
+          })
      }
+     console.log(arrayNodriz);
      return arrayNodriz
 }
 
@@ -82,7 +91,7 @@ function printTable1(arrayA, arrayB) {
      let eventWithLowestPercent = arrayA.shift()
      let eventWithHighestPercent = arrayA.pop()
      let eventWithHighestCapacity = arrayB.pop()
-     console.log(eventWithLowestPercent);
+     // console.log(eventWithLowestPercent);
      table1.innerHTML = `
      <th>Event statistics</th>
      <tr> 
@@ -102,7 +111,8 @@ function printTable2and3(array,id){
      array.forEach(element => {
           id.innerHTML += `
           <tr>
-               <td>${element}</td>
+               <td>${element.name}</td>
+               <td>${element.revenue}</td>
           </tr>
           `
      });
