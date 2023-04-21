@@ -68,23 +68,23 @@ function filterCapacitySort(array){
 }
 
 function filterCreateArrayRevenues (arrayA, arrayB){
-     let arrayNodriz = []
+     let arrayObjectRevenues = []
      for( let value of arrayA){
 
           let aux = arrayB.filter( element => element.category === value)
           console.log(`${value}` , aux);
-          let pastRevenues = aux.reduce( (acc, element) => acc + (element.assistance? element.assistance * element.price : element.estimate * element.price), 0,)
-          let percentage = (aux.reduce( (acc, element) => acc + ( (element.assistance * 100 / element.capacity) ), 0) / aux.length).toFixed(2)
+          let pastRevenuesTotal = aux.reduce( (acc, element) => acc + (element.assistance? element.assistance * element.price : element.estimate * element.price), 0,)
+          let percentageTotal = (aux.reduce( (acc, element) => acc + ( (element.assistance? element.assistance * 100 / element.capacity : element.estimate * 100 / element.capacity) ), 0) / aux.length).toFixed(2)
 
-          console.log(`${value}`, pastRevenues);
-          arrayNodriz.push( {
+          // console.log(`${value}`, pastRevenuesTotal);
+          arrayObjectRevenues.push( {
                name: `${value}`,
-               revenue: pastRevenues,
-               assistancePercentage: `percentage
+               revenue: pastRevenuesTotal,
+               assistancePercentage: percentageTotal
           })
      }
-     console.log(arrayNodriz);
-     return arrayNodriz
+     console.log(arrayObjectRevenues);
+     return arrayObjectRevenues
 }
 
 function printTable1(arrayA, arrayB) {
@@ -113,6 +113,7 @@ function printTable2and3(array,id){
           <tr>
                <td>${element.name}</td>
                <td>${element.revenue}</td>
+               <td>${element.assistancePercentage}%</td>
           </tr>
           `
      });
