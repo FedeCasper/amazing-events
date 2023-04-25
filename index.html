@@ -12,28 +12,73 @@
      <title>Amazing Events</title>
 </head>
 
-<body class="d-flex flex-column align-items-center bg-body-secondary">
+<body class="d-flex flex-column align-items-center bg-body-tertiary">
 
-     <header>
-          <h1>Amazing Events</h1>
+     <header class="d-flex flex-column align-items-center">
+          <img class="m-3" id="headerLogo" src="./assets/Logo-Amazing-Events.png" alt="">
+          <h1 class="p-1">"Welcome to the amazing world of your nearest events"</h1>
      </header>
 
-     <nav class="m-3">
-          <a href="#">Home</a>
-          <a href="./pastEvents.html">Past Events</a>
-          <a href="./upcomingEvents.html">Upcoming Events</a>
-          <a href="./contact.html">Contact</a>
-          <a href="./stats.html">Stats</a>
+     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top w-100 shadow">
+          <div class="container-fluid">
+               <img id="navLogo" src="./assets/logo.png" alt="">
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                         <li class="nav-item">
+                              <a class="nav-link accent" aria-current="page" href="#">Home</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="./pastEvents.html">Past Events</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="./upcomingEvents.html">Upcoming Events</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="./contact.html">Contact</a>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link" href="./stats.html">Stats</a>
+                         </li>
+                         <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                   Dropdown
+                              </a>
+                              <ul class="dropdown-menu">
+                                   <li><a class="dropdown-item" href="#">Action</a></li>
+                                   <li><a class="dropdown-item" href="#">Another action</a></li>
+                                   <li>
+                                        <hr class="dropdown-divider">
+                                   </li>
+                                   <li><a class="dropdown-item" href="#">Something else here</a></li>
+                              </ul>
+                         </li>
+                         <li class="nav-item">
+                              <a class="nav-link disabled">Disabled</a>
+                         </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                         <div id="contadorCards" class="ms-2 d-flex align-items-center w-100"></div>
+                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                         <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+               </div>
+          </div>
      </nav>
 
      <main class="w-75">
-          <div id="contenedorCheckboxs" class="d-flex bg-info-subtle p-3">
-               <!-- Acá se imprimen los checkbox -->
-          </div>
           <div class="m-3 d-flex">
                <input type="text" name="" id="inputText" placeholder="Type the name of the event">
-               <button type="button" id="botonBuscar">Search</button> 
-               <div id="contadorCards" class="ms-4"></div>
+               <button type="button" id="botonBuscar">Search</button>
+               
+          </div>
+          <div id="contenedorCheckboxs" class="d-flex p-3">
+               <!-- Acá se imprimen los checkbox -->
           </div>
           <div id="contenedorCards" class="d-flex bg-dark-subtle p-5">
                <!-- Acá se imprimen las cards -->

@@ -1,7 +1,7 @@
 export function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
-     div.innerHTML = `<h5>Found ${cantidadCards} events.</h5>`
+     div.innerHTML = `<h6 class="ms-2">Found <span class="accent">${cantidadCards}</span> events.</h6>`
      contadorCards.appendChild(div)
 }
 

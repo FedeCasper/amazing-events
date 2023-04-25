@@ -1,13 +1,59 @@
-main{
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&display=swap');
+:root{
+     --color-primary: #D90368;
+     --color-secondary: #D6F4D4;
+}
+
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     color: rgb(70, 70, 70);
+}
+
+body{
+     background-image: url(./assets/pattern.png);
+}
+
+header {
+     background-color: #d9ffd1;
+     width: 100%;
+}
+
+#navLogo {
+     height: 2rem;
+}
+
+#headerLogo {
+     height: 4rem;
+}
+
+.accent{
+     color: var(--color-primary);
+}
+
+main {
      padding: 40px;
 }
-:placeholder-shown{
+
+h1 {
+     font-family: 'Kalam', cursive;
+     font-size: 2rem;
+}
+
+#contenedorCheckboxs{
+     background-color: var(--color-secondary);
+     border-bottom: 2px solid var(--color-primary);
+}
+
+:placeholder-shown {
      font-size: small;
      color: darkgrey;
      font-style: italic;
 }
-footer{
+
+footer {
      width: 100%;
      height: 200px;
-     background-color:gainsboro;
+     background-color: gainsboro;
 }
