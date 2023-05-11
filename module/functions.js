@@ -13,7 +13,7 @@ export function renderizarCards (array, contenedor){
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
           `<div class="card" style="width: 18rem;">
-               <img src="${element.image}" class="card-img-top" alt="...">
+               <img src="${element.image}" class="card-img-top" alt="..." style="height: 12rem; object-fit:cover;">
                <div class="card-body">
                     <h5 class="card-title">${element.name}</h5>
                     <h6 class="card-title">${element.category}</h6>
