@@ -33,9 +33,11 @@ header {
 
 .accent {
      color: var(--color-primary);
+     font-weight: bolder;
 }
 
 main {
+     width: 90%;
      padding: 40px;
      min-height: 75vh;
 }
@@ -52,6 +54,10 @@ h1 {
 
 #contenedorCards {
      background-color: rgba(137, 43, 226, 0.158);
+}
+
+.image-card{
+     border-bottom: 2px solid blueviolet;
 }
 
 .category {
@@ -77,6 +83,10 @@ h1 {
      font-size: small;
      color: darkgrey;
      font-style: italic;
+}
+
+.tableHeaders{
+     background-color: blueviolet !important;
 }
 
 footer {

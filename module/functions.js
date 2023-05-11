@@ -8,12 +8,12 @@ export function imprimirNumeroCards (array){
 export function renderizarCards (array, contenedor){
      contadorCards.innerHTML = ""
      let divAuxiliar = document.createElement('div')
-     divAuxiliar.classList.add('d-flex', 'flex-wrap', 'gap-3', 'justify-content-center')
+     divAuxiliar.classList.add('d-flex', 'flex-wrap', 'gap-2', 'justify-content-center')
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
           `<div class="card shadow-sm" style="width: 18rem;">
-               <img src="${element.image}" class="card-img-top" alt="..." style="height: 12rem; object-fit:cover;">
+               <img src="${element.image}" class="card-img-top image-card" alt="..." style="height: 12rem; object-fit:cover;">
                <div class="card-body d-flex flex-column justify-content-between flex-wrap">
                     <div class="d-flex flex-column">
                          <h5 class="card-title">${element.name}</h5>
@@ -126,7 +126,7 @@ export function printTable1(arrayA, arrayB) {
      let eventWithHighestCapacity = arrayB.pop()
      // console.log(eventWithLowestPercent);
      table1.innerHTML = `
-     <th>Event statistics</th>
+     <th colspan="3 class="tableHeaders"">Event statistics</th>
      <tr> 
           <td>Events with the highest % of assistance</td>
           <td>Events with the lowest % of assistance</td>
