@@ -5,6 +5,8 @@ const url = "https://mindhub-xj03.onrender.com/api/amazing"
 let contenedorCards = document.getElementById('contenedorCards');
 let contadorCards = document.getElementById('contadorCards')
 
+
+
 fetch(url)
 .then(response => response.json())
 .then(data => {
@@ -17,6 +19,7 @@ fetch(url)
      let checkboxs = document.querySelectorAll('input[type="checkbox"]')
      botonBuscar.addEventListener('click', () => filtraCruzado(checkboxs, arrayEventos, inputText))
      checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraCruzado(checkboxs, arrayEventos, inputText)))
+
 })
 .catch(error => console.error(error))
 

@@ -19,8 +19,8 @@ export function renderizarCards (array, contenedor){
                     <h6 class="card-title">${element.category}</h6>
                     <p class="card-text">${element.description}</p>
                     <h6 class="card-text">Capacity: ${element.capacity} pers.</h6>
-                    <h6 class="card-text">Assitance: ${element.assistance}</h6>
-                    <h6 class="card-text">Price: $${element.assistance}</h6>
+                    <h6 class="card-text">${element.assistance? `Assistance: ${element.assistance}` : `Estimated: ${element.estimate}`}</h6>
+                    <h6 class="card-text">Price: $ ${element.price}</h6>
                     <a href="#" class="btn btn-primary">Go somewhere</a>
                </div>
           </div>`
