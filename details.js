@@ -15,15 +15,21 @@ fetch(url)
      function imprimirCardDetails(){
           cardDetails.innerHTML =
           `
-          <div class="card mb-3" style="max-width: 540px;">
+          <div class="card mb-3" style="max-width: 940px;">
                <div class="row g-0">
                     <div class="col-md-4">
-                         <img src="${eventoCapturado.image}" class="img-fluid rounded-start" alt="...">
+                         <img src="${eventoCapturado.image}" class="rounded-start" alt="${eventoCapturado.name}"  style="max-width: 100%; height: 100%; object-fit:cover;">
                     </div>
                     <div class="col-md-8">
                          <div class="card-body">
-                              <h5 class="card-title">${eventoCapturado.name}</h5>
-                              <p class="card-text"></p>
+                              <h3 class="card-title">${eventoCapturado.name}</h3>
+                              <p class="card-text">Category: ${eventoCapturado.category}</p>
+                              <p class="card-text">Description: ${eventoCapturado.description}</p>
+                              <p class="card-text">Place: ${eventoCapturado.place}</p>
+                              <p class="card-text">Date: ${eventoCapturado.date}</p>
+                              <p class="card-text">Capacity: ${eventoCapturado.capacity}</p>
+                              <p class="card-text">Price: $ ${eventoCapturado.price}</p>
+                              <h6 class="card-text">${eventoCapturado.assistance? `Assistance: ${eventoCapturado.assistance}` : `Estimated: ${eventoCapturado.estimate}`}</h6>
                               <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                          </div>
                     </div>
