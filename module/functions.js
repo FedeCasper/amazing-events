@@ -21,7 +21,7 @@ export function renderizarCards (array, contenedor){
                     <h6 class="card-text">Capacity: ${element.capacity} pers.</h6>
                     <h6 class="card-text">${element.assistance? `Assistance: ${element.assistance}` : `Estimated: ${element.estimate}`}</h6>
                     <h6 class="card-text">Price: $ ${element.price}</h6>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <a href="./details.html?id=${element._id}" class="btn btn-primary">Go somewhere</a>
                </div>
           </div>`
           fragment.appendChild(divAuxiliar)
