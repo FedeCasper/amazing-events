@@ -17,9 +17,8 @@ body {
 }
 
 header {
-     background: rgb(255,255,255);
-     background: linear-gradient(312deg, rgba(255,255,255,1) 0%, rgba(251,245,255,1) 53%, rgba(229,193,255,1) 83%, rgba(193,110,254,1) 95%, rgba(165,45,253,1) 100%);     min-height: 15vh;
-     width: 100%;
+     background: rgb(0,243,255);
+     background: linear-gradient(312deg, rgba(0,243,255,0.31556372549019607) 0%, rgba(245,254,255,1) 45%, rgba(229,193,255,1) 83%, rgba(193,110,254,1) 95%, rgba(165,45,253,1) 100%);     width: 100%;
 }
 
 #navLogo {
@@ -47,8 +46,13 @@ h1 {
 }
 
 #contenedorCheckboxs {
-     background-color: var(--color-secondary);
-     border-bottom: 2px solid var(--color-primary);
+     background-color: #00f2ff57;
+     border-bottom: 2px solid magenta;
+}
+
+.btn-search{
+     color: #D90368;
+     border: 2px solid #D90368;
 }
 
 #contenedorCards {
