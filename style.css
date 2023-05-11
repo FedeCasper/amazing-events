@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&display=swap');
-:root{
+
+:root {
      --color-primary: #D90368;
      --color-secondary: #addee2;
 }
 
-*{
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
      color: rgb(70, 70, 70);
 }
 
-body{
+body {
      background-image: url(./assets/pattern.png);
 }
 
@@ -30,7 +31,7 @@ header {
      height: 4rem;
 }
 
-.accent{
+.accent {
      color: var(--color-primary);
 }
 
@@ -44,22 +45,32 @@ h1 {
      font-size: 2rem;
 }
 
-#contenedorCheckboxs{
+#contenedorCheckboxs {
      background-color: var(--color-secondary);
      border-bottom: 2px solid var(--color-primary);
 }
 
-#contenedorCards{
+#contenedorCards {
      background-color: rgba(137, 43, 226, 0.158);
 }
 
-.category{
+.category {
      color: #D90368;
 }
 
-.btn-primary{
+.btn-primary {
      border: none;
      background-color: blueviolet !important;
+     transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+     transform: scale(1.1);
+     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.446);
+}
+
+#cardTitleH3 {
+     color: blueviolet;
 }
 
 :placeholder-shown {

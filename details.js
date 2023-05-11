@@ -22,13 +22,13 @@ fetch(url)
                     </div>
                     <div class="col-md-8">
                          <div class="card-body">
-                              <h3 class="card-title">${eventoCapturado.name}</h3>
-                              <p class="card-text">Category: ${eventoCapturado.category}</p>
-                              <p class="card-text">Description: ${eventoCapturado.description}</p>
-                              <p class="card-text">Place: ${eventoCapturado.place}</p>
-                              <p class="card-text">Date: ${eventoCapturado.date}</p>
-                              <p class="card-text">Capacity: ${eventoCapturado.capacity}</p>
-                              <p class="card-text">Price: $ ${eventoCapturado.price}</p>
+                              <h3 id="cardTitleH3" class="card-title">${eventoCapturado.name}</h3>
+                              <p class="card-text category">${eventoCapturado.category}</p>
+                              <p class="card-text fst-italic">${eventoCapturado.description}</p>
+                              <h6 class="card-text">Place: ${eventoCapturado.place}</p>
+                              <h6 class="card-text">Date: ${eventoCapturado.date}</p>
+                              <h6 class="card-text">Capacity: ${eventoCapturado.capacity}</p>
+                              <h6 class="card-text">Price: $ ${eventoCapturado.price}</h6>
                               <h6 class="card-text">${eventoCapturado.assistance? `Assistance: ${eventoCapturado.assistance}` : `Estimated: ${eventoCapturado.estimate}`}</h6>
                               <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                          </div>

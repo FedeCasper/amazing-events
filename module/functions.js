@@ -12,19 +12,19 @@ export function renderizarCards (array, contenedor){
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
-          `<div class="card" style="width: 18rem;">
+          `<div class="card shadow-sm" style="width: 18rem;">
                <img src="${element.image}" class="card-img-top" alt="..." style="height: 12rem; object-fit:cover;">
                <div class="card-body d-flex flex-column justify-content-between flex-wrap">
                     <div class="d-flex flex-column">
                          <h5 class="card-title">${element.name}</h5>
                          <h6 class="card-title category">${element.category}</h6>
-                         <p class="card-text">${element.description}</p>
+                         <p class="card-text fst-italic">${element.description}</p>
                          <h6 class="card-text">Capacity: ${element.capacity} pers.</h6>
                          <h6 class="card-text">${element.assistance? `Assistance: ${element.assistance}` : `Estimated: ${element.estimate}`}</h6>
                          <h6 class="card-text">Price: $ ${element.price}</h6>
                     </div>
                     <div class="d-flex mt-3">
-                         <a href="./details.html?id=${element._id}" class="btn btn-primary">Go somewhere</a>
+                         <a id="btn-goSomewhere" href="./details.html?id=${element._id}" class="btn btn-primary">Go somewhere</a>
                     </div>
                </div>
           </div>`
