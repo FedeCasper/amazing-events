@@ -53,6 +53,10 @@ h1 {
      background-color: rgba(137, 43, 226, 0.158);
 }
 
+.category{
+     color: #D90368;
+}
+
 .btn-primary{
      border: none;
      background-color: blueviolet !important;
