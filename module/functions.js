@@ -8,13 +8,13 @@ export function imprimirNumeroCards (array){
 export function renderizarCards (array, contenedor){
      contadorCards.innerHTML = ""
      let divAuxiliar = document.createElement('div')
-     divAuxiliar.classList.add('d-flex', 'flex-wrap', 'gap-2', 'justify-content-center')
+     divAuxiliar.classList.add('d-flex', 'flex-wrap', 'gap-3', 'justify-content-center')
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
-          `<div class="card shadow-sm" style="width: 18rem;">
+          `<div class="card shadow card-container" style="width: 18rem;">
                <img src="${element.image}" class="card-img-top image-card" alt="..." style="height: 12rem; object-fit:cover;">
-               <div class="card-body d-flex flex-column justify-content-between flex-wrap">
+               <div class="card-body d-flex flex-column justify-content-between flex-wrap card-body">
                     <div class="d-flex flex-column">
                          <h5 class="card-title">${element.name}</h5>
                          <h6 class="card-title category">${element.category}</h6>
