@@ -1,3 +1,38 @@
+export function printMostPopular (array, leftList, rightList){
+     let eventsSorted = array.sort((a,b) => (a.assistance ? a.assistance : a.estimate) - (b.assistance ? b.assistance : b.estimate))
+     let top6 = eventsSorted.slice(-6)
+     let top3 = top6.slice(-3)
+     let topRest = top6.slice(0,3)
+
+     top3.forEach((elemento, indice) => 
+          leftList.innerHTML +=
+               `
+               <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">${elemento.name}</h5>
+                         <small>#${indice+1}</small>
+                    </div>
+                    <p class="mb-1">${elemento.description.length < 70 ? elemento.description : elemento.description.slice(0, 80) + "..."}  </p>
+                    <small class="date">${elemento.date}</small>
+               </a>
+               `
+          )
+
+     topRest.forEach((elemento, indice) => 
+          rightList.innerHTML +=
+               `
+               <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                         <h5 class="mb-1">${elemento.name}</h5>
+                         <small>#${indice+4}</small>
+                    </div>
+                    <p class="mb-1">${elemento.description.length < 70 ? elemento.description : elemento.description.slice(0, 80) + "..."}  </p>
+                    <small class="date">${elemento.date}</small>
+               </a>
+               `
+          )
+}
+
 export function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
