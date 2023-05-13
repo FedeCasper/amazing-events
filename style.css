@@ -77,6 +77,32 @@ h1 {
      transform: scale(1.02);
 }
 
+.mainCards{
+     position: relative;
+}
+
+.star{
+     background-image: url(./assets/star.png);
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+     border: none;
+     background-color: unset;
+}
+
+.star:hover{
+     background-image: url(./assets/fill-star.png);
+}
+
+.starSelected{
+     background-image: url(./assets/fill-star.png);
+     position: absolute;
+     bottom: 20px;
+     right: 20px;
+     border: none;
+     background-color: unset;
+}
+
 .image-card{
      border-bottom: 2px solid blueviolet;
 }

@@ -8,6 +8,7 @@ let leftList = document.querySelector('.top3')
 let rightList = document.querySelector('.top6')
 
 
+
 fetch(url)
 .then(response => response.json())
 .then(data => {
@@ -21,6 +22,19 @@ fetch(url)
      botonBuscar.addEventListener('click', () => filtraCruzado(checkboxs, arrayEventos, inputText))
      checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraCruzado(checkboxs, arrayEventos, inputText)))
      printMostPopular(arrayEventos, leftList, rightList)
+
+     let star = document.querySelectorAll('.star')
+     console.log([star]);
+     star.forEach( element => {
+          element.addEventListener('click', (e) => {
+               e.target.value == "" ? (e.target.value = "on", element.classList.replace('star', 'starSelected')) : (e.target.value = "" , element.classList.replace('starSelected', 'star'))
+               console.log(e.target.value)
+
+          }) 
+     })
+     function changeStar(){
+     
+     }
 })
 .catch(error => console.error(error))
 

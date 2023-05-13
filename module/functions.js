@@ -33,6 +33,8 @@ export function printMostPopular (array, leftList, rightList){
           )
 }
 
+
+
 export function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
@@ -47,7 +49,8 @@ export function renderizarCards (array, contenedor){
      let fragment = document.createDocumentFragment()
      array.forEach( element => { 
           divAuxiliar.innerHTML += 
-          `<div class="card shadow card-container" style="width: 18rem;">
+          `<div class="card shadow card-container mainCards" style="width: 18rem;">
+               <button class="star" style="height: 32px; width:32px;"></button>
                <img src="${element.image}" class="card-img-top image-card" alt="..." style="height: 12rem; object-fit:cover;">
                <div class="card-body d-flex flex-column justify-content-between flex-wrap card-body">
                     <div class="d-flex flex-column">
