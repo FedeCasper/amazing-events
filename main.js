@@ -1,5 +1,5 @@
 // import { array } from "./module/functions"
-import { imprimirNumeroCards, renderizarCards, renderizaChechboxs, filtraPorInputText, filtraPorCheckbox, filtraCruzado, printMostPopular } from "./module/functions.js";
+import { imprimirNumeroCards, renderizarCards, renderizaChechboxs, filtraPorInputText, filtraPorCheckbox, filtraCruzado, printMostPopular, changeStar } from "./module/functions.js";
 
 const url = "https://mindhub-xj03.onrender.com/api/amazing"
 let contenedorCards = document.getElementById('contenedorCards');
@@ -19,22 +19,12 @@ fetch(url)
      let botonBuscar = document.getElementById('botonBuscar')
      let inputText = document.getElementById('inputText')
      let checkboxs = document.querySelectorAll('input[type="checkbox"]')
+     let star = document.querySelectorAll('.star')
      botonBuscar.addEventListener('click', () => filtraCruzado(checkboxs, arrayEventos, inputText))
      checkboxs.forEach(checkbox => checkbox.addEventListener('change', () => filtraCruzado(checkboxs, arrayEventos, inputText)))
      printMostPopular(arrayEventos, leftList, rightList)
+     star.forEach( element => element.addEventListener( 'click', (e) => changeStar(e, element) ) )
 
-     let star = document.querySelectorAll('.star')
-     console.log([star]);
-     star.forEach( element => {
-          element.addEventListener('click', (e) => {
-               e.target.value == "" ? (e.target.value = "on", element.classList.replace('star', 'starSelected')) : (e.target.value = "" , element.classList.replace('starSelected', 'star'))
-               console.log(e.target.value)
-
-          }) 
-     })
-     function changeStar(){
-     
-     }
 })
 .catch(error => console.error(error))
 

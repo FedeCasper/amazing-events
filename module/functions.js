@@ -33,8 +33,6 @@ export function printMostPopular (array, leftList, rightList){
           )
 }
 
-
-
 export function imprimirNumeroCards (array){
      let div = document.createElement('div')
      let cantidadCards = array.length
@@ -74,6 +72,11 @@ export function renderizarCards (array, contenedor){
      });
      contenedor.appendChild(fragment)
      imprimirNumeroCards(array)
+}
+
+export function changeStar(e, element){
+     e.target.value == "" ? (e.target.value = "on", element.classList.replace('star', 'starSelected')) : (e.target.value = "" , element.classList.replace('starSelected', 'star'))
+     console.log(e.target.value)
 }
 
 export function renderizaChechboxs(array, contenedor){

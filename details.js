@@ -5,11 +5,13 @@ let id = params.get('id');
 console.log(id);
 const cardDetails = document.getElementById('cardDetails')
 console.log(cardDetails);
+const relatedDiv = document.querySelector('.related')
 
 fetch(url)
 .then(response => response.json())
 .then(data => {
-     let eventoCapturado = data.events.find( element => element._id == id);
+     let arrayOriginal = data.events 
+     let eventoCapturado = arrayOriginal.find( element => element._id == id);
      console.log(eventoCapturado);
 
      function imprimirCardDetails(){
@@ -38,5 +40,28 @@ fetch(url)
           `
      }
      imprimirCardDetails()
+
+     let relatedEvents = arrayOriginal.filter( element => element.category == eventoCapturado.category )
+     console.log(relatedEvents);
+
+     function printRelated (){
+
+          relatedEvents.forEach(element => {
+               relatedDiv.innerHTML +=
+               `
+               <div class="col">
+               <div class="card">
+                    <img src="${element.image}" class="card-img-top" alt="..." style="max-width: 100%; height: 260px; object-fit:cover;">
+                    <div class="card-body">
+                         <h5 class="card-title">${element.name}</h5>
+                         <p class="card-text">${element.category}</p>
+                    </div>
+               </div>
+          </div>
+               `
+          });
+
+     }
+     printRelated()
 })
 .catch(error => console.error(error))
