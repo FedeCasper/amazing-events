@@ -196,3 +196,71 @@ export function printTable2and3(array,id){
           `
      });
 }
+
+// Details Functions ------------------------//
+
+export function filterByRelated(array, objeto){
+     return array.filter( element => element.category == objeto.category && element._id != objeto._id )
+}
+
+export function selectOneEventPerCategory (array, object){
+     console.log(object._id);
+     let noRepeatCategory = [...new Set(array.map(element => element.category))]
+     let arrayRelated =  noRepeatCategory.map( categoria => array.find( event => event.category == categoria && event._id != object._id ) ).filter(e =>e)
+     return arrayRelated
+}
+
+export function imprimirCardDetails(object, $element){
+     $element.innerHTML =
+     `
+     <div class="card mb-3" style="max-width: 940px;">
+          <div class="row g-0">
+               <div class="col-md-4">
+                    <img src="${object.image}" class="rounded-start" alt="${object.name}"  style="max-width: 100%; height: 100%; object-fit:cover;">
+               </div>
+               <div class="col-md-8">
+                    <div class="card-body">
+                         <h3 id="cardTitleH3" class="card-title">${object.name}</h3>
+                         <p class="card-text category">${object.category}</p>
+                         <p class="card-text fst-italic">${object.description}</p>
+                         <h6 class="card-text">Place: ${object.place}</p>
+                         <h6 class="card-text">Date: ${object.date}</p>
+                         <h6 class="card-text">Capacity: ${object.capacity}</p>
+                         <h6 class="card-text">Price: $ ${object.price}</h6>
+                         <h6 class="card-text">${object.assistance? `Assistance: ${object.assistance}` : `Estimated: ${object.estimate}`}</h6>
+                         <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                    </div>
+               </div>
+          </div>
+     </div>
+     `
+}
+
+export function printRelated (array, $element, arrayAuxiliar){
+     console.log([$element]);
+     if(array.length == 0){
+          $element.innerHTML = `<h2 class="text-center mb-3">Check some others interesting events</h2>`
+          array = arrayAuxiliar
+     }
+     let fragment = document.createDocumentFragment()
+     let auxDiv = document.createElement('div')
+     auxDiv.classList.add('d-flex', 'justify-content-center','gap-3')
+     array.forEach(element => {
+          auxDiv.innerHTML +=
+          `
+          <div class="card" style="width: 18rem;">
+               <img src="${element.image}" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover">
+               <div class="card-body">
+                    <h6 class="card-title border-bottom pb-2 fw-bold">${element.name}</h6>
+                    <h6 class="card-title category">${element.category}</h6>
+                    <p class="card-text fw-bold m-0">Place: <span class="fw-normal">${element.place}</span></p>
+                    <h6 class="card-text date mt-2">${new Date().toDateString(element.date)}</h6>
+               </div>
+          </div>
+          `
+          fragment.appendChild(auxDiv)
+     });
+     $element.appendChild(fragment)
+}
+
+
