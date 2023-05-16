@@ -15,18 +15,9 @@ fetch(url)
 .then(data => {
      let arrayOriginal = data.events 
      let eventoObjeto = arrayOriginal.find( element => element._id == id);
-
-     
      imprimirCardDetails(eventoObjeto,$cardDetails)
-
      let arrayFiltered = filterByRelated(arrayOriginal, eventoObjeto)
      let arrayOneEventPerCategory = selectOneEventPerCategory (arrayOriginal, eventoObjeto)
-     console.log(arrayFiltered);
-
      printRelated(arrayFiltered, $relatedDiv, arrayOneEventPerCategory)
-
-     
-
-
 })
 .catch(error => console.error(error))

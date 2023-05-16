@@ -167,7 +167,9 @@ export function filterCreateArrayRevenues (arrayA, arrayB){
 
 export function printTable1(arrayA, arrayB) {
      let eventWithLowestPercent = arrayA.shift()
+     console.log(eventWithLowestPercent);
      let eventWithHighestPercent = arrayA.pop()
+     console.log(eventWithHighestPercent);
      let eventWithHighestCapacity = arrayB.pop()
      // console.log(eventWithLowestPercent);
      table1.innerHTML = `
@@ -179,8 +181,8 @@ export function printTable1(arrayA, arrayB) {
      </tr>
      <tr>
           <td>${eventWithHighestPercent.event} ${eventWithHighestPercent.percentage}%</td>
-          <td>${eventWithHighestPercent.event} ${eventWithLowestPercent.percentage}%</td>
-          <td>${eventWithHighestCapacity.name} ${eventWithHighestCapacity.capacity}</td>
+          <td>${eventWithLowestPercent.event} ${eventWithLowestPercent.percentage}%</td>
+          <td>${eventWithHighestCapacity.name} ${(eventWithHighestCapacity.capacity).toLocaleString()}</td>
      </tr>
      `
 }
@@ -190,7 +192,7 @@ export function printTable2and3(array,id){
           id.innerHTML += `
           <tr>
                <td>${element.name}</td>
-               <td>${element.revenue}</td>
+               <td>$ ${(element.revenue).toLocaleString()}</td>
                <td>${element.assistancePercentage}%</td>
           </tr>
           `
