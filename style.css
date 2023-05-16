@@ -130,9 +130,14 @@ h1 {
      color: blueviolet;
 }
 
-.card-body{
+.normal-card{
      background: rgb(255,255,255);
      background: linear-gradient(165deg, rgba(255,255,255,1) 0%, rgba(251,245,255,1) 53%, rgba(229,193,255,1) 83%, rgba(193,110,254,1) 95%, rgba(165,45,253,1) 100%);
+}
+
+.related-card{
+     background: rgb(131,131,131);
+     background: linear-gradient(356deg, rgba(131,131,131,0.2819502801120448) 0%, rgba(245,254,255,0.41360294117647056) 52%);
 }
 
 :placeholder-shown {

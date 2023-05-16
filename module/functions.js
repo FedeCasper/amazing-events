@@ -50,7 +50,7 @@ export function renderizarCards (array, contenedor){
           `<div class="card shadow card-container mainCards" style="width: 18rem;">
                <button class="star" style="height: 32px; width:32px;"></button>
                <img src="${element.image}" class="card-img-top image-card" alt="..." style="height: 12rem; object-fit:cover;">
-               <div class="card-body d-flex flex-column justify-content-between flex-wrap card-body">
+               <div class="card-body d-flex flex-column justify-content-between flex-wrap normal-card">
                     <div class="d-flex flex-column">
                          <h5 class="card-title border-bottom pb-2 fw-bold">${element.name}</h5>
                          <h6 class="card-title category">${element.category}</h6>
@@ -221,7 +221,7 @@ export function imprimirCardDetails(object, $element){
                     <img src="${object.image}" class="rounded-start" alt="${object.name}"  style="max-width: 100%; height: 100%; object-fit:cover;">
                </div>
                <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-body normal-card">
                          <h3 id="cardTitleH3" class="card-title">${object.name}</h3>
                          <p class="card-text category">${object.category}</p>
                          <p class="card-text fst-italic">${object.description}</p>
@@ -250,9 +250,9 @@ export function printRelated (array, $element, arrayAuxiliar){
      array.forEach(element => {
           auxDiv.innerHTML +=
           `
-          <div class="card" style="width: 18rem;">
+          <div class="card card-container" style="width: 18rem;">
                <img src="${element.image}" class="card-img-top" alt="..." style="height: 10rem; object-fit: cover">
-               <div class="card-body">
+               <div class="card-body related-card">
                     <h6 class="card-title border-bottom pb-2 fw-bold">${element.name}</h6>
                     <h6 class="card-title category">${element.category}</h6>
                     <p class="card-text fw-bold m-0">Place: <span class="fw-normal">${element.place}</span></p>
