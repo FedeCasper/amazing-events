@@ -42,6 +42,7 @@ fetch(url)
           
           let arraysByPastCategories = filterCreateArrayRevenues (arrayPastEventsValues, arrayPastEvents)
           // console.log("ARRAY PAST CATEGORIES REVENUES", arraysByPastCategories);
+
           let arraysByUpcomingCategories = filterCreateArrayRevenues (arrayUpcommingEventValues, arrayUpcommingEvents)
           // console.log("ARRAY UPCOMING CATEGORIES REVENUES", arraysByUpcomingCategories);
 
